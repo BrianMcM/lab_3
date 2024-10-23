@@ -1,0 +1,14 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>quoco.ws</groupId>
+        <artifactId>task2</artifactId>
+        <version>1.0</version>
+    </parent>
+    <artifactId>broker</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- Add other dependencies specific to the broker service -->
+    </dependencies>
+</project>

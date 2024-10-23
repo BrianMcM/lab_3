@@ -1,0 +1,72 @@
+services:
+  broker:
+    build:
+      context: ./broker  # Path to Dockerfile for broker
+    container_name: broker
+    networks:
+      my-network:
+        aliases:
+          - myserver
+    ports:
+      - "9000:9000"
+
+  auldfellas:
+    build:
+      context: ./auldfellas  # Path to Dockerfile for auldfellas
+    container_name: auldfellas
+    networks:
+      my-network:
+        aliases:
+          - auldfellas
+    depends_on:
+      - broker
+    environment:
+      - BROKER_HOST=myserver
+
+  dodgygeezers:
+    build:
+      context: ./dodgygeezers  # Path to Dockerfile for dodgygeezers
+    container_name: dodgygeezers
+    networks:
+      my-network:
+        aliases:
+          - dodgygeezers
+    depends_on:
+      - broker
+    environment:
+      - BROKER_HOST=myserver
+
+  girlsallowed:
+    build:
+      context: ./girlsallowed  # Path to Dockerfile for girlsallowed
+    container_name: girlsallowed
+    networks:
+      my-network:
+        aliases:
+          - girlsallowed
+    depends_on:
+      - broker
+    environment:
+      - BROKER_HOST=myserver
+
+#  client:
+#    build:
+#      context: ./client  # Path to Dockerfile for client
+#    container_name: client
+#    networks:
+#      my-network:
+#        aliases:
+#          - client
+#    depends_on:
+#      - dodgygeezers
+#      - auldfellas
+#      - girlsallowed
+#      - broker
+#    entrypoint: ["sh", "-c", "sleep 2 && java -jar /.jar"]
+#    environment:
+#      - BROKER_HOST=myserver
+
+networks:
+  my-network:
+    driver: bridge
+
